@@ -1,42 +1,8 @@
-function createGameBoard (gridSize) {
-    let grid;
-    
-    function setupGrid(){
-        grid = new Array(gridSize**2);
-        for(let i=0; i<grid.length; i++){
-            grid[i] = 0;
-        }
-    }
-
-    function setGridElement(row, col, value){
-        grid[(col-1)+gridSize*(row-1)] = value;
-    }
-
-    function getGrid(){
-        return grid;
-    }
-
-    function showGrid(){
-        console.log(grid);
-    }
-
-    function resetGrid(){
-        for(let i=0; i<grid.length; i++){
-            grid[i] = 0;
-        }
-    }
-
-    setupGrid();
-    
-    return {setGridElement, getGrid, showGrid, resetGrid};
-};
-
 const gameManager = (function(){
     let turnNumber = 0;
     const players = {player1: createPlayer("Player1", 1), player2: createPlayer("Player2", 2)}
     let currentPlayer = players.player1;
     const gridSize = 3;
-    const gameBoard = createGameBoard(gridSize);
 
     function playTurn(row, col){
         value = currentPlayer.getToken();
@@ -119,6 +85,39 @@ const gameManager = (function(){
     
         return {name, increaseScore, getScore, getToken};
     }
+
+    const gameBoard = (function (gridSize) {
+        let grid;
+        
+        function setupGrid(){
+            grid = new Array(gridSize**2);
+            for(let i=0; i<grid.length; i++){
+                grid[i] = 0;
+            }
+        }
+    
+        function setGridElement(row, col, value){
+            grid[(col-1)+gridSize*(row-1)] = value;
+        }
+    
+        function getGrid(){
+            return grid;
+        }
+    
+        function showGrid(){
+            console.log(grid);
+        }
+    
+        function resetGrid(){
+            for(let i=0; i<grid.length; i++){
+                grid[i] = 0;
+            }
+        }
+    
+        setupGrid();
+        
+        return {setGridElement, getGrid, showGrid, resetGrid};
+    })(gridSize);
 
     return {playTurn};
 })();
