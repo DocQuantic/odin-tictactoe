@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Neon 80s';
+    src: url('Neon80s.woff2') format('woff2'),
+        url('Neon80s.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

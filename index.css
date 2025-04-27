@@ -1,9 +1,37 @@
+@font-face {
+    font-family: 'Neon 80s';
+    src: url('./fonts/transfonter.org-20250426-195344/Neon80s.woff2') format('woff2'),
+        url('./fonts/transfonter.org-20250426-195344/Neon80s.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-h1{
-    color: brown;
+:root{
+    --dark-purple: #1d157c;
+    --medium-purple: #9a41dc;
+    --light-purple: #bc45ff;
+    --pink: #ff4cff;
+    --light-pink: #ffadff;
+    --yellow: #ffff79;
+}
+
+html{
+    font-size: 30px;
+    font-family: "Neon 80s";
+}
+
+header{
+    background-color: var(--medium-purple);
+    color: var(--yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
 }
