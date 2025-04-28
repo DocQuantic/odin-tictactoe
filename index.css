@@ -27,6 +27,13 @@ html{
     font-family: "Neon 80s";
 }
 
+body{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+}
+
 header{
     background-color: var(--medium-purple);
     color: var(--yellow);
@@ -40,7 +47,6 @@ header{
 main{
     background-color: var(--light-purple);
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -52,6 +58,7 @@ main{
     grid-template-columns: repeat(3, 5em);
     grid-template-rows: repeat(3, 5em);
 }
+
 
 .game-board > .cell:nth-last-child(n+4){
     border-bottom: 4px solid var(--yellow);
