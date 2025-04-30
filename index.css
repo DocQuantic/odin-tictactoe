@@ -42,6 +42,8 @@ header{
     align-items: center;
     padding: 1.5em 0;
     text-shadow: 0px 0px 7px var(--yellow);
+    box-shadow: 0 10px 25px var(--medium-purple);
+    z-index: 10;
 }
 
 main{
@@ -85,4 +87,30 @@ main{
     > p:hover{
         cursor: default;
     }
+}
+
+.scores{
+    color: var(--yellow);
+    text-shadow: 0 0 3px var(--yellow);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, min-content);
+}
+
+.scores > h2{
+    grid-column: 1/-1;
+    justify-self: center;
+    margin-bottom: 0.5em;
+}
+
+.player{
+    display: flex;
+    align-items: center;
+    > p + p{
+        margin-left: 0.3em;
+    }
+}
+
+.sep{
+    justify-self: center;
 }
