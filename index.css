@@ -89,6 +89,14 @@ main{
     }
 }
 
+.unplayed > p{
+    opacity: 0.5;
+}
+
+.played > p{
+    opacity: 1;
+}
+
 .scores{
     color: var(--yellow);
     text-shadow: 0 0 3px var(--yellow);

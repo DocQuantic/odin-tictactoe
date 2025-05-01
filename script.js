@@ -75,6 +75,10 @@ const ScreenManager = (function(){
             function increaseScore(){
                 score++;
             }
+
+            function getName(){
+                return name;
+            }
         
             function getScore(){
                 return score;
@@ -84,7 +88,7 @@ const ScreenManager = (function(){
                 return token;
             }
         
-            return {name, increaseScore, getScore, getToken};
+            return {increaseScore, getName, getScore, getToken};
         }
     
         const gameBoard = (function (gridSize) {
@@ -98,7 +102,9 @@ const ScreenManager = (function(){
             }
         
             function setGridElement(row, col, value){
-                grid[(col-1)+gridSize*(row-1)] = value;
+                console.log(col);
+                console.log(row);
+                grid[(col)+gridSize*(row)] = value;
             }
         
             function getGrid(){
@@ -127,8 +133,12 @@ const ScreenManager = (function(){
         function getCurrentPlayer(){
             return currentPlayer;
         }
+
+        function getGrid(){
+            return gameBoard.getGrid();
+        }
     
-        return {getCurrentPlayer, getGridSize, playTurn};
+        return {getCurrentPlayer, getGridSize, getGrid, playTurn};
     })();
 
     function generateGameBoardCells(gridSize){
@@ -156,8 +166,12 @@ const ScreenManager = (function(){
                 cell.addEventListener("click", () => {
                     if(cell.classList[1] === "unplayed"){
                         const cellId = cell.getAttribute("id");
-                        gameManager.playTurn(cell.getAttribute("id"));
-                        //cell.innerText = gameManager.getCurrentPlayer().getToken() === 1 ? "X" : "O";
+                        const cellRow = Number(cellId[0]);
+                        const cellCol = Number(cellId[2]);
+                        cell.innerText = gameManager.getCurrentPlayer().getToken() === 1 ? "X" : "O";
+                        gameManager.playTurn(cellRow, cellCol);
+                        cell.classList.remove("unplayed");
+                        cell.classList.add("played");
                     }
                 })
                 gameBoard.appendChild(cell);
