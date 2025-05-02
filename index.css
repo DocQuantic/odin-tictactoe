@@ -58,8 +58,8 @@ main{
 
 .game-board{
     display: grid;
-    grid-template-columns: repeat(3, 5em);
-    grid-template-rows: repeat(3, 5em);
+    grid-template-columns: repeat(3, 4.5em);
+    grid-template-rows: repeat(3, 4.5em);
 }
 
 
@@ -76,16 +76,10 @@ main{
 }
 
 .cell{
-    font-size: 6em;
+    font-size: 5em;
     display: flex;
     justify-content: center;
     align-items: center;
-    > p{
-        transform: translateY(-10px);
-    }
-    > p:hover{
-        cursor: default;
-    }
 }
 
 .cell:hover{
@@ -103,8 +97,7 @@ main{
 }
 
 .scores,
-.game-over,
-.game-not-over{
+#game-over{
     color: var(--yellow);
     text-shadow: 0 0 3px var(--yellow);
 }

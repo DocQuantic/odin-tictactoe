@@ -16,7 +16,6 @@ const ScreenManager = (function(){
             const winner = checkEndGame();
             winPlayer = winner === 1 ? players.player1 : players.player2
             if(winner !== 0){
-                console.log(`Congratulations ! ${winPlayer.name} won the game`);
                 isGameOver = true;
                 winPlayer.increaseScore();
                 
@@ -98,8 +97,6 @@ const ScreenManager = (function(){
             }
         
             function setGridElement(row, col, value){
-                console.log(col);
-                console.log(row);
                 grid[(col)+gridSize*(row)] = value;
             }
         
@@ -108,7 +105,6 @@ const ScreenManager = (function(){
             }
         
             function showGrid(){
-                console.log(grid);
             }
         
             function resetGrid(){
@@ -178,7 +174,7 @@ const ScreenManager = (function(){
                         cell.classList.add("played");
                         if(gameManager.getGameOver()){
                             const winner = gameManager.getWinner();
-                            showWinnerMessage(winner);
+                            showGameOver(winner);
                             updatePlayerScore(winner);
                         }
                     }
@@ -195,7 +191,13 @@ const ScreenManager = (function(){
     }
 
     function showGameOver(player){
+        const gameOverElement = document.querySelector("#game-over");
+        const winnerName = document.querySelector("#player-win");
 
+        winnerName.innerText = player.getName();
+
+        gameOverElement.classList.remove("game-not-over");
+        gameOverElement.classList.add("game-over");
     }
 
     generateGameBoardCells(gameManager.getGridSize())
