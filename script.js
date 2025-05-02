@@ -150,17 +150,15 @@ const ScreenManager = (function(){
                 cell.classList.add("cell");
                 cell.classList.add("unplayed");
                 cell.setAttribute("id", `${i}-${j}`);
-                const cellContent = document.createElement("p");
-                cell.appendChild(cellContent);
 
                 cell.addEventListener("mouseenter", () => {
                     if(cell.classList[1] === "unplayed"){
-                        cell.children[0].innerText = gameManager.getCurrentPlayer().getToken() === 1 ? "X" : "O";
+                        cell.innerText = gameManager.getCurrentPlayer().getToken() === 1 ? "X" : "O";
                     }
                     })
-                cellContent.addEventListener("mouseleave", () => {
+                cell.addEventListener("mouseleave", () => {
                     if(cell.classList[1] === "unplayed"){
-                        cell.children[0].innerText = "";
+                        cell.innerText = "";
                     }
                     })
                 cell.addEventListener("click", () => {

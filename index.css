@@ -19,6 +19,7 @@
     --light-purple: #bc45ff;
     --pink: #ff4cff;
     --light-pink: #ffadff;
+    --light-pink-transp: rgba(255, 173, 255, 0.5);
     --yellow: #ffff79;
 }
 
@@ -75,8 +76,6 @@ main{
 }
 
 .cell{
-    color: var(--light-pink);
-    text-shadow: 0 0 10px var(--light-pink);
     font-size: 6em;
     display: flex;
     justify-content: center;
@@ -89,12 +88,14 @@ main{
     }
 }
 
-.unplayed > p{
-    opacity: 0.5;
+.unplayed{
+    color: var(--light-pink-transp);
+    text-shadow: 0 0 10px var(--light-pink-transp);
 }
 
-.played > p{
-    opacity: 1;
+.played{
+    color: var(--light-pink);
+    text-shadow: 0 0 10px var(--light-pink);
 }
 
 .scores{
