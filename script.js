@@ -177,7 +177,9 @@ const ScreenManager = (function(){
                         cell.classList.remove("unplayed");
                         cell.classList.add("played");
                         if(gameManager.getGameOver()){
-                            updatePlayerScore(gameManager.getWinner());
+                            const winner = gameManager.getWinner();
+                            showWinnerMessage(winner);
+                            updatePlayerScore(winner);
                         }
                     }
                 })
@@ -190,6 +192,10 @@ const ScreenManager = (function(){
         const playerToken = player.getToken();
         const score = document.querySelector(playerToken === 1 ? ".p1 > .score" : ".p2 > .score");
         score.innerText = player.getScore();
+    }
+
+    function showGameOver(player){
+
     }
 
     generateGameBoardCells(gameManager.getGridSize())

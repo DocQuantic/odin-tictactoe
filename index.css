@@ -88,6 +88,10 @@ main{
     }
 }
 
+.cell:hover{
+    cursor: default;
+}
+
 .unplayed{
     color: var(--light-pink-transp);
     text-shadow: 0 0 10px var(--light-pink-transp);
@@ -98,9 +102,24 @@ main{
     text-shadow: 0 0 10px var(--light-pink);
 }
 
-.scores{
+.scores,
+.game-over,
+.game-not-over{
     color: var(--yellow);
     text-shadow: 0 0 3px var(--yellow);
+}
+
+.game-not-over{
+    opacity: 0;
+    cursor: default;
+}
+
+.game-over{
+    opacity: 1;
+    cursor: text;
+}
+
+.scores{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, min-content);
