@@ -4,6 +4,8 @@ const ScreenManager = (function(){
         const players = {player1: createPlayer("Player1", 1), player2: createPlayer("Player2", 2)}
         let currentPlayer = players.player1;
         const gridSize = 3;
+        let isGameOver = false;
+        let winPlayer;
     
         function playTurn(row, col){
             value = currentPlayer.getToken();
@@ -12,22 +14,16 @@ const ScreenManager = (function(){
             gameBoard.showGrid();
     
             const winner = checkEndGame();
-            const winPlayer = winner === 1 ? players.player1 : players.player2
+            winPlayer = winner === 1 ? players.player1 : players.player2
             if(winner !== 0){
                 console.log(`Congratulations ! ${winPlayer.name} won the game`);
+                isGameOver = true;
                 winPlayer.increaseScore();
-    
-                newGame();
+                
                 return;
             };
     
             nextTurn();
-        }
-    
-        function newGame(){
-            currentPlayer = players.player1;
-            turnNumber = 0;
-            gameBoard.resetGrid();
         }
     
         function nextTurn(){
@@ -134,11 +130,21 @@ const ScreenManager = (function(){
             return currentPlayer;
         }
 
-        function getGrid(){
-            return gameBoard.getGrid();
+        function getGameOver(){
+            return isGameOver;
+        }
+
+        function getWinner(){
+            return winPlayer;
+        }
+
+        function newGame(){
+            currentPlayer = players.player1;
+            turnNumber = 0;
+            gameBoard.resetGrid();
         }
     
-        return {getCurrentPlayer, getGridSize, getGrid, playTurn};
+        return {playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, newGame};
     })();
 
     function generateGameBoardCells(gridSize){
@@ -152,17 +158,17 @@ const ScreenManager = (function(){
                 cell.setAttribute("id", `${i}-${j}`);
 
                 cell.addEventListener("mouseenter", () => {
-                    if(cell.classList[1] === "unplayed"){
+                    if(cell.classList[1] === "unplayed" && !gameManager.getGameOver()){
                         cell.innerText = gameManager.getCurrentPlayer().getToken() === 1 ? "X" : "O";
                     }
                     })
                 cell.addEventListener("mouseleave", () => {
-                    if(cell.classList[1] === "unplayed"){
+                    if(cell.classList[1] === "unplayed" && !gameManager.getGameOver()){
                         cell.innerText = "";
                     }
                     })
                 cell.addEventListener("click", () => {
-                    if(cell.classList[1] === "unplayed"){
+                    if(cell.classList[1] === "unplayed" && !gameManager.getGameOver()){
                         const cellId = cell.getAttribute("id");
                         const cellRow = Number(cellId[0]);
                         const cellCol = Number(cellId[2]);
@@ -170,11 +176,20 @@ const ScreenManager = (function(){
                         gameManager.playTurn(cellRow, cellCol);
                         cell.classList.remove("unplayed");
                         cell.classList.add("played");
+                        if(gameManager.getGameOver()){
+                            updatePlayerScore(gameManager.getWinner());
+                        }
                     }
                 })
                 gameBoard.appendChild(cell);
             }
         }
+    }
+
+    function updatePlayerScore(player){
+        const playerToken = player.getToken();
+        const score = document.querySelector(playerToken === 1 ? ".p1 > .score" : ".p2 > .score");
+        score.innerText = player.getScore();
     }
 
     generateGameBoardCells(gameManager.getGridSize())
