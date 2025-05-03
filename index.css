@@ -39,13 +39,30 @@ header{
     background-color: var(--medium-purple);
     color: var(--yellow);
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    padding: 1.5em 0;
+    gap: 3em;
+    padding: 1.5em 2em;
     text-shadow: 0px 0px 7px var(--yellow);
     box-shadow: 0 10px 25px var(--medium-purple);
     z-index: 10;
 }
+
+button{
+    appearance: none;
+    font: inherit;
+    font-size: 0.8em;
+    color: var(--dark-purple);
+    background-color: var(--light-pink);
+    padding: 0.5em 1em;
+    border: 2px solid var(--light-purple);
+    border-radius: 15px;
+}
+
+button:hover{
+    box-shadow: 0 0 10px var(--light-purple);
+}
+
 
 main{
     background-color: var(--light-purple);

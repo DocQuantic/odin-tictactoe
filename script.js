@@ -137,14 +137,17 @@ const ScreenManager = (function(){
         function newGame(){
             currentPlayer = players.player1;
             turnNumber = 0;
+            isGameOver = false;
             gameBoard.resetGrid();
         }
     
         return {playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, newGame};
     })();
 
-    function generateGameBoardCells(gridSize){
+    function initializeUI(gridSize){
         const gameBoard = document.querySelector(".game-board");
+        const resetBtn = document.querySelector("#reset-btn");
+        const newGameBtn = document.querySelector("#new-game-btn");
 
         for(let i=0; i<gridSize; i++){
             for(let j=0; j<gridSize; j++){
@@ -182,6 +185,12 @@ const ScreenManager = (function(){
                 gameBoard.appendChild(cell);
             }
         }
+
+        resetBtn.addEventListener("click", () => {
+            gameManager.newGame();
+            resetGridUI();
+            hideGameOver();
+        })
     }
 
     function updatePlayerScore(player){
@@ -200,5 +209,22 @@ const ScreenManager = (function(){
         gameOverElement.classList.add("game-over");
     }
 
-    generateGameBoardCells(gameManager.getGridSize())
+    function hideGameOver(){
+        const gameOverElement = document.querySelector("#game-over");
+
+        gameOverElement.classList.remove("game-over");
+        gameOverElement.classList.add("game-not-over");
+    }
+
+    function resetGridUI(){
+        const cells = document.querySelectorAll(".cell");
+
+        cells.forEach((cell) => {
+            cell.innerText = "";
+            cell.classList.remove("played");
+            cell.classList.add("unplayed");
+        })
+    }
+
+    initializeUI(gameManager.getGridSize())
 })();
