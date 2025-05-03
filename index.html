@@ -7,36 +7,56 @@
     <title>Odin - Tic Tac Toe</title>
 </head>
 <body>
-    <header>
-        <h1>Tic, Tac, Toe Game !</h1>
-        <div class="buttons">
-            <button type="button" id="reset-btn">Reset</button>
-            <button type="button" id="new-game-btn">New Game</button>
-        </div>
-    </header>
-    <main>
-        <div class="game-board">
-            
-        </div>
-        <div class="game-info">
-            <div class="game-not-over" id="game-over">
-                <p>Congratulations! <span id="player-win">Player</span> won the game.</p>
+    <div class="main-container">
+        <header>
+            <h1>Tic, Tac, Toe Game !</h1>
+            <div class="buttons">
+                <button type="button" id="reset-btn">Reset</button>
+                <button type="button" id="new-game-btn">New Game</button>
             </div>
-            <div class="scores">
-                <h2>Scores:</h2>
-                <div class="player p1">
-                    <p class="name">Player 1 :</p>
-                    <p class="score">0</p>
+        </header>
+        <main>
+            <div class="game-board">
+        
+            </div>
+            <div class="game-info">
+                <div class="game-not-over" id="game-over">
+                    <p>Congratulations! <span id="player-win">Player</span> won the game.</p>
                 </div>
-                <div class="sep">
-                    <p>/</p>
-                </div>
-                <div class="player p2">
-                    <p class="score">0</p>
-                    <p class="name">: Player 2</p>
+                <div class="scores">
+                    <h2>Scores:</h2>
+                    <div class="player p1">
+                        <p class="name">Player 1 :</p>
+                        <p class="score">0</p>
+                    </div>
+                    <div class="sep">
+                        <p>/</p>
+                    </div>
+                    <div class="player p2">
+                        <p class="score">0</p>
+                        <p class="name">: Player 2</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+    <div class="dialog-container">
+        <dialog>
+            <h2>Choose player names</h2>
+            <form method="dialog">
+                <ul>
+                    <li>
+                        <label for="player1">Player 1 (X)</label>
+                        <input type="text" id="player1" name="player1" placeholder="Player 1">
+                    </li>
+                    <li>
+                        <label for="player2">Player 2 (O)</label>
+                        <input type="text" id="player2" name="player2" placeholder="Player 2">
+                    </li>
+                </ul>
+            </form>
+            <button>Ok</button>
+        </dialog>
+    </div>
 </body>
 </html>

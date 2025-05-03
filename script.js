@@ -74,6 +74,10 @@ const ScreenManager = (function(){
             function getName(){
                 return name;
             }
+
+            function setName(newName){
+                name = newName;
+            }
         
             function getScore(){
                 return score;
@@ -83,7 +87,7 @@ const ScreenManager = (function(){
                 return token;
             }
         
-            return {increaseScore, getName, getScore, getToken};
+            return {increaseScore, getName, setName, getScore, getToken};
         }
     
         const gameBoard = (function (gridSize) {
@@ -226,5 +230,11 @@ const ScreenManager = (function(){
         })
     }
 
+    function showDialog(){
+        const dialog = document.querySelector("dialog");
+        dialog.showModal();
+    }
+
     initializeUI(gameManager.getGridSize())
+    showDialog()
 })();
