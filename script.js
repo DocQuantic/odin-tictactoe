@@ -211,8 +211,8 @@ const ScreenManager = (function(){
             
             gameManager.newGame();
             resetGridUI();
+            resetScoresUI();
             hideGameOver();
-            
         })
 
         dialogBtn.addEventListener("click", () => {
@@ -263,6 +263,14 @@ const ScreenManager = (function(){
             cell.innerText = "";
             cell.classList.remove("played");
             cell.classList.add("unplayed");
+        })
+    }
+
+    function resetScoresUI(){
+        const scores = document.querySelectorAll(".score");
+
+        scores.forEach((score) => {
+            score.innerText = "0";
         })
     }
 
