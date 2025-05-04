@@ -1,7 +1,7 @@
 const ScreenManager = (function(){
     const gameManager = (function(){
         let turnNumber = 0;
-        const players = {player1: createPlayer("Player1", 1), player2: createPlayer("Player2", 2)}
+        const players = null;
         let currentPlayer = players.player1;
         const gridSize = 3;
         let isGameOver = false;
@@ -23,6 +23,10 @@ const ScreenManager = (function(){
             };
     
             nextTurn();
+        }
+
+        function createPlayers(player1Name, player2Name){
+            players = {player1: createPlayer(player1Name, 1), player2: createPlayer(player2Name, 2)}
         }
     
         function nextTurn(){
@@ -149,7 +153,7 @@ const ScreenManager = (function(){
             gameBoard.resetGrid();
         }
     
-        return {playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, getPlayers, newGame};
+        return {createPlayers, playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, getPlayers, newGame};
     })();
 
     function initializeUI(gridSize){
@@ -203,14 +207,15 @@ const ScreenManager = (function(){
         })
 
         newGameBtn.addEventListener("click", () => {
-
+            gameManager.newGame();
+            resetGridUI();
+            hideGameOver();
         })
 
         dialogBtn.addEventListener("click", () => {
-            const players = gameManager.getPlayers();
             const dialog = document.querySelector("dialog");
-            players.player1.setName(nameInput[0].value);
-            players.player2.setName(nameInput[1].value);
+
+            gameManager.createPlayers(nameInput[0].value, nameInput[1].value)
 
             updateUIPlayerNames(nameInput[0].value, nameInput[1].value);
             dialog.close();
