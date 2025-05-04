@@ -143,10 +143,6 @@ const ScreenManager = (function(){
             return winPlayer;
         }
 
-        function getPlayers(){
-            return players;
-        }
-
         function newGame(){
             currentPlayer = players.player1;
             turnNumber = 0;
@@ -154,7 +150,7 @@ const ScreenManager = (function(){
             gameBoard.resetGrid();
         }
     
-        return {createPlayers, playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, getPlayers, newGame};
+        return {createPlayers, playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, newGame};
     })();
 
     function initializeUI(gridSize){
@@ -208,9 +204,12 @@ const ScreenManager = (function(){
         })
 
         newGameBtn.addEventListener("click", () => {
+            showDialog();
+            
             gameManager.newGame();
             resetGridUI();
             hideGameOver();
+            
         })
 
         dialogBtn.addEventListener("click", () => {

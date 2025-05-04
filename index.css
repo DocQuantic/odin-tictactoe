@@ -216,10 +216,13 @@ main{
 
 .player{
     display: flex;
-    align-items: center;
     > p + p{
         margin-left: 0.3em;
     }
+}
+
+.p2{
+    justify-content: flex-end;
 }
 
 .sep{
