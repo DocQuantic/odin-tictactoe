@@ -138,6 +138,10 @@ const ScreenManager = (function(){
             return winPlayer;
         }
 
+        function getPlayers(){
+            return players;
+        }
+
         function newGame(){
             currentPlayer = players.player1;
             turnNumber = 0;
@@ -145,13 +149,15 @@ const ScreenManager = (function(){
             gameBoard.resetGrid();
         }
     
-        return {playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, newGame};
+        return {playTurn, getCurrentPlayer, getGridSize, getGameOver, getWinner, getPlayers, newGame};
     })();
 
     function initializeUI(gridSize){
         const gameBoard = document.querySelector(".game-board");
         const resetBtn = document.querySelector("#reset-btn");
         const newGameBtn = document.querySelector("#new-game-btn");
+        const dialogBtn = document.querySelector("#dialog-btn");
+        const nameInput = document.querySelectorAll("input");
 
         for(let i=0; i<gridSize; i++){
             for(let j=0; j<gridSize; j++){
@@ -195,6 +201,28 @@ const ScreenManager = (function(){
             resetGridUI();
             hideGameOver();
         })
+
+        newGameBtn.addEventListener("click", () => {
+
+        })
+
+        dialogBtn.addEventListener("click", () => {
+            const players = gameManager.getPlayers();
+            const dialog = document.querySelector("dialog");
+            players.player1.setName(nameInput[0].value);
+            players.player2.setName(nameInput[1].value);
+
+            updateUIPlayerNames(nameInput[0].value, nameInput[1].value);
+            dialog.close();
+            dialog.classList.remove("flex");
+            dialog.classList.add("hide");
+        })
+    }
+
+    function updateUIPlayerNames(player1Name, player2Name){
+        const playerNames = document.querySelectorAll(".player > .name");
+        playerNames[0].innerText = `${player1Name} :` ;
+        playerNames[1].innerText = `: ${player2Name}`;
     }
 
     function updatePlayerScore(player){
@@ -233,6 +261,8 @@ const ScreenManager = (function(){
     function showDialog(){
         const dialog = document.querySelector("dialog");
         dialog.showModal();
+        dialog.classList.remove("hide");
+        dialog.classList.add("flex");
     }
 
     initializeUI(gameManager.getGridSize())

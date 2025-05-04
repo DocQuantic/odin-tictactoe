@@ -37,7 +37,6 @@ input[type="text"]{
 body{
     height: 100vh;
     width: 100vw;
-    background-color: aqua;
 }
 
 .dialog-container{
@@ -48,6 +47,14 @@ body{
     justify-content: center;
     align-items: center;
     position: absolute;
+}
+
+.flex{
+    display: flex;
+}
+
+.hide{
+    display: none;
 }
 
 dialog{
@@ -62,7 +69,6 @@ dialog{
     width: 800px;
     height: 400px;
 
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
 
