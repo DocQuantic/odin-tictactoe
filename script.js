@@ -14,16 +14,20 @@ const ScreenManager = (function(){
             gameBoard.setGridElement(row, col, value);
             gameBoard.showGrid();
     
-            const winner = checkEndGame();
-            winPlayer = winner === 1 ? players.player1 : players.player2
-            if(winner !== 0){
+            winPlayer = checkWinner();
+            if(winPlayer !== null){
                 isGameOver = true;
                 winPlayer.increaseScore();
                 
                 return;
+            } else if(winPlayer === null && turnNumber === 8){
+                isGameOver = true;
+                console.log("Nobody won");
+
+                return;
+            } else {
+                nextTurn();
             };
-    
-            nextTurn();
         }
     
         function nextTurn(){
@@ -32,9 +36,11 @@ const ScreenManager = (function(){
             currentPlayer = currentPlayer === players.player1 ? players.player2 : players.player1;
         }
     
-        function checkEndGame(){
+        function checkWinner(){
             grid = gameBoard.getGrid();
             const isEqual = (element, i, arr) => element === arr[0];
+            let winnerToken;
+            let winPlayer = null;
     
             //check rows and columns
             for(let i=0; i<gridSize; i++){
@@ -42,9 +48,7 @@ const ScreenManager = (function(){
                 const col = [grid[i], grid[gridSize + i], grid[2*gridSize + i]]
     
                 if(row.every(isEqual) || col.every(isEqual)){
-                    const winner = row.every(isEqual) ? row[0] : col[0];
-    
-                    return winner;
+                    winnerToken = row.every(isEqual) ? row[0] : col[0];
                 }
             }
     
@@ -52,17 +56,27 @@ const ScreenManager = (function(){
             const diag1 = [];
             const diag2 = [];
             for(let i=0; i<gridSize; i++){
-                diag1.push(grid[(gridSize+1)*i])
-                diag2.push(grid[(gridSize-1)*(i+1)])
+                diag1.push(grid[(gridSize+1)*i]);
+                diag2.push(grid[(gridSize-1)*(i+1)]);
             }
             
             if(diag1.every(isEqual) || diag2.every(isEqual)){
-                const winner = diag1.every(isEqual) ? diag1[0] : diag2[0];
-    
-                return winner;
+                winnerToken = diag1.every(isEqual) ? diag1[0] : diag2[0];
+            }
+
+            switch(winnerToken){
+                case 1:
+                    winPlayer = players.player1;
+                    break;
+                case 2:
+                    winPlayer = players.player2;
+                    break;
+                default:
+                    winPlayer = null;
+                    break;
             }
     
-            return 0;
+            return winPlayer;
         }
     
         function createPlayer(name, token){
@@ -192,7 +206,9 @@ const ScreenManager = (function(){
                         if(gameManager.getGameOver()){
                             const winner = gameManager.getWinner();
                             showGameOver(winner);
-                            updatePlayerScore(winner);
+                            if(winner !== null){
+                                updatePlayerScore(winner);
+                            }
                         }
                     }
                 })
@@ -241,9 +257,12 @@ const ScreenManager = (function(){
 
     function showGameOver(player){
         const gameOverElement = document.querySelector("#game-over");
-        const winnerName = document.querySelector("#player-win");
 
-        winnerName.innerText = player.getName();
+        if(player === null){
+            gameOverElement.innerText = "It's a tie !"
+        } else {
+            gameOverElement.innerText = `Congratulations! ${player.getName()} won the game.`
+        }
 
         gameOverElement.classList.remove("game-not-over");
         gameOverElement.classList.add("game-over");
