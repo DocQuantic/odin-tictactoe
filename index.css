@@ -148,8 +148,8 @@ main{
 
 .game-board{
     display: grid;
-    grid-template-columns: repeat(3, 4.5em);
-    grid-template-rows: repeat(3, 4.5em);
+    grid-template-columns: repeat(3, 10vw);
+    grid-template-rows: repeat(3, 10vw);
 }
 
 
@@ -166,7 +166,7 @@ main{
 }
 
 .cell{
-    font-size: 5em;
+    font-size: 10vw;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,6 +1,7 @@
 const ScreenManager = (function(){
     const gameManager = (function(){
         let turnNumber = 0;
+        let gameNumber = 0;
         let players;
         let currentPlayer;
         const gridSize = 3;
@@ -63,11 +64,6 @@ const ScreenManager = (function(){
     
             return 0;
         }
-
-        function createPlayers(player1Name, player2Name){
-            players = {player1: createPlayer(player1Name, 1), player2: createPlayer(player2Name, 2)};
-            currentPlayer = players.player1;
-        }
     
         function createPlayer(name, token){
             let score = 0;
@@ -93,6 +89,12 @@ const ScreenManager = (function(){
             }
         
             return {increaseScore, getName, setName, getScore, getToken};
+        }
+
+        function createPlayers(player1Name, player2Name){
+            players = {player1: createPlayer(player1Name, 1), player2: createPlayer(player2Name, 2)};
+            
+            currentPlayer = players.player1;
         }
     
         const gameBoard = (function (gridSize) {
@@ -144,8 +146,9 @@ const ScreenManager = (function(){
         }
 
         function newGame(){
-            currentPlayer = players.player1;
             turnNumber = 0;
+            gameNumber++;
+            currentPlayer = gameNumber%2 === 0 ? players.player1 : players.player2;
             isGameOver = false;
             gameBoard.resetGrid();
         }
