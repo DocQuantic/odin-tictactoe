@@ -106,10 +106,6 @@ body{
     }
 }
 
-dialog::backdrop{
-    backdrop-filter: blur(20px);
-}
-
 .main{
     display: grid;
     grid-template-columns: 1fr;
@@ -146,7 +142,6 @@ button:hover{
     box-shadow: 0 0 10px var(--light-purple);
 }
 
-
 main{
     background-color: var(--light-purple);
     width: 100%;
@@ -161,7 +156,6 @@ main{
     grid-template-columns: repeat(3, 10vw);
     grid-template-rows: repeat(3, 10vw);
 }
-
 
 .game-board > .cell:nth-last-child(n+4){
     border-bottom: 4px solid var(--yellow);

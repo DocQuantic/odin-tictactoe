@@ -89,10 +89,6 @@ const ScreenManager = (function(){
             function getName(){
                 return name;
             }
-
-            function setName(newName){
-                name = newName;
-            }
         
             function getScore(){
                 return score;
@@ -102,7 +98,7 @@ const ScreenManager = (function(){
                 return token;
             }
         
-            return {increaseScore, getName, setName, getScore, getToken};
+            return {increaseScore, getName, getScore, getToken};
         }
 
         function createPlayers(player1Name, player2Name){
@@ -129,9 +125,6 @@ const ScreenManager = (function(){
                 return grid;
             }
         
-            function showGrid(){
-            }
-        
             function resetGrid(){
                 for(let i=0; i<grid.length; i++){
                     grid[i] = 0;
@@ -140,7 +133,7 @@ const ScreenManager = (function(){
         
             setupGrid();
             
-            return {setGridElement, getGrid, showGrid, resetGrid};
+            return {setGridElement, getGrid, resetGrid};
         })(gridSize);
     
         function getGridSize(){
@@ -232,7 +225,6 @@ const ScreenManager = (function(){
         })
 
         dialogBtn.addEventListener("click", (event) => {
-            //event.preventDefault();
             const dialog = document.querySelector(".dialog");
 
             const player1 = nameInput[0].value === "" ? "Player 1" : nameInput[0].value;
