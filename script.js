@@ -231,13 +231,16 @@ const ScreenManager = (function(){
             hideGameOver();
         })
 
-        dialogBtn.addEventListener("click", () => {
-            const dialog = document.querySelector("dialog");
+        dialogBtn.addEventListener("click", (event) => {
+            //event.preventDefault();
+            const dialog = document.querySelector(".dialog");
 
-            gameManager.createPlayers(nameInput[0].value, nameInput[1].value)
+            const player1 = nameInput[0].value === "" ? "Player 1" : nameInput[0].value;
+            const player2 = nameInput[1].value === "" ? "Player 2" : nameInput[1].value;
 
-            updateUIPlayerNames(nameInput[0].value, nameInput[1].value);
-            dialog.close();
+            gameManager.createPlayers(player1, player2)
+
+            updateUIPlayerNames(player1, player2);
             dialog.classList.remove("flex");
             dialog.classList.add("hide");
         })
@@ -294,8 +297,7 @@ const ScreenManager = (function(){
     }
 
     function showDialog(){
-        const dialog = document.querySelector("dialog");
-        dialog.showModal();
+        const dialog = document.querySelector(".dialog");
         dialog.classList.remove("hide");
         dialog.classList.add("flex");
     }
