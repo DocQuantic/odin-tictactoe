@@ -113,14 +113,18 @@ dialog::backdrop{
 header{
     background-color: var(--medium-purple);
     color: var(--yellow);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 3em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     padding: 1.5em 2em;
     text-shadow: 0px 0px 7px var(--yellow);
     box-shadow: 0 10px 25px var(--medium-purple);
     z-index: 10;
+    justify-items: center;
+    text-align: center;
+    align-items: center;
+    > .buttons{
+        justify-self:flex-end;
+    }
 }
 
 button{
