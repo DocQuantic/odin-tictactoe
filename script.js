@@ -22,7 +22,6 @@ const ScreenManager = (function(){
                 return;
             } else if(winPlayer === null && turnNumber === 8){
                 isGameOver = true;
-                console.log("Nobody won");
 
                 return;
             } else {
@@ -49,20 +48,25 @@ const ScreenManager = (function(){
     
                 if(row.every(isEqual) || col.every(isEqual)){
                     winnerToken = row.every(isEqual) ? row[0] : col[0];
+                    if(winnerToken !== 0){
+                        break;
+                    }
                 }
             }
     
             //check diagonals
-            const diag1 = [];
-            const diag2 = [];
-            for(let i=0; i<gridSize; i++){
-                diag1.push(grid[(gridSize+1)*i]);
-                diag2.push(grid[(gridSize-1)*(i+1)]);
-            }
-            
-            if(diag1.every(isEqual) || diag2.every(isEqual)){
-                winnerToken = diag1.every(isEqual) ? diag1[0] : diag2[0];
-            }
+            if(winnerToken !== 0){
+                const diag1 = [];
+                const diag2 = [];
+                for(let i=0; i<gridSize; i++){
+                    diag1.push(grid[(gridSize+1)*i]);
+                    diag2.push(grid[(gridSize-1)*(i+1)]);
+                }
+                
+                if(diag1.every(isEqual) || diag2.every(isEqual)){
+                    winnerToken = diag1.every(isEqual) ? diag1[0] : diag2[0];
+                }
+            }            
 
             switch(winnerToken){
                 case 1:
@@ -124,6 +128,10 @@ const ScreenManager = (function(){
             function getGrid(){
                 return grid;
             }
+
+            function showGrid(){
+                console.log(grid);
+            }
         
             function resetGrid(){
                 for(let i=0; i<grid.length; i++){
@@ -133,7 +141,7 @@ const ScreenManager = (function(){
         
             setupGrid();
             
-            return {setGridElement, getGrid, resetGrid};
+            return {setGridElement, getGrid, showGrid, resetGrid};
         })(gridSize);
     
         function getGridSize(){
@@ -226,6 +234,7 @@ const ScreenManager = (function(){
 
         dialogBtn.addEventListener("click", (event) => {
             const dialog = document.querySelector(".dialog");
+            const main = document.querySelector(".main");
 
             const player1 = nameInput[0].value === "" ? "Player 1" : nameInput[0].value;
             const player2 = nameInput[1].value === "" ? "Player 2" : nameInput[1].value;
@@ -235,6 +244,8 @@ const ScreenManager = (function(){
             updateUIPlayerNames(player1, player2);
             dialog.classList.remove("flex");
             dialog.classList.add("hide");
+            main.classList.remove("hide");
+            main.classList.add("grid")
         })
     }
 
@@ -290,8 +301,11 @@ const ScreenManager = (function(){
 
     function showDialog(){
         const dialog = document.querySelector(".dialog");
+        const main = document.querySelector(".main");
         dialog.classList.remove("hide");
         dialog.classList.add("flex");
+        main.classList.remove("grid");
+        main.classList.add("hide");
     }
 
     initializeUI(gameManager.getGridSize())

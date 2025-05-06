@@ -58,6 +58,10 @@ body{
     align-items: center;
 }
 
+.grid{
+    display: grid;
+}
+
 .hide{
     display: none;
 }
@@ -107,7 +111,6 @@ body{
 }
 
 .main{
-    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: min-content 1fr;
 }
